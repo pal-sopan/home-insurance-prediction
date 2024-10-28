@@ -1,8 +1,9 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template 
 import joblib
 import pandas as pd
 import logging
 import os
+import mysql.connector  # Import MySQL connector
 
 # Import necessary libraries for model preprocessing
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
@@ -23,6 +24,15 @@ except Exception as e:
     logger.error(f"Error loading the model and preprocessor: {str(e)}")
     model = None
     preprocessor = None
+
+# MySQL database connection
+def get_db_connection():
+    return mysql.connector.connect(
+        host='localhost',  # Your MySQL host
+        user='root',  # Your MySQL username
+        password='admin',  # Your MySQL password
+        database='home_insurance'  # Your database name
+    )
 
 @app.route('/')
 def home():
@@ -62,7 +72,7 @@ column_mapping = {
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    """Make a prediction based on input data and store submitted data in a CSV file."""
+    """Make a prediction based on input data and store submitted data in MySQL database."""
     try:
         # Parse JSON data from request
         data = request.get_json()
@@ -76,6 +86,7 @@ def predict():
 
         # Map incoming data to expected columns for the model
         model_data = {column_mapping[key]: value for key, value in data.items() if key in column_mapping}
+        model_data['Are You Married'] = 1 if model_data['Are You Married'] == 'Yes' else 0
 
         # Convert to DataFrame for prediction
         df = pd.DataFrame([model_data])
@@ -99,19 +110,39 @@ def predict():
         # Log prediction result for debugging
         logger.info(f"Prediction: {predicted_premium}")
 
-        # Prepare data for CSV
-        df['Predicted Premium'] = predicted_premium  # Add the predicted premium to the DataFrame
-
-        # Store the submitted data in a CSV file
-        csv_file_path = 'submitted_data.csv'
+        # Store the submitted data in the MySQL database
         try:
-            if not os.path.isfile(csv_file_path):
-                df.to_csv(csv_file_path, mode='w', header=True, index=False)  # Create file and write header
-            else:
-                df.to_csv(csv_file_path, mode='a', header=False, index=False)  # Append to existing file
-            logger.info(f"Data saved to {csv_file_path} successfully.")
-        except Exception as file_error:
-            logger.error(f"Error saving data to CSV: {str(file_error)}")
+            conn = get_db_connection()
+            cursor = conn.cursor()
+            
+            # Insert user data into the users table
+            cursor.execute(
+                """
+                INSERT INTO users (gender, age, sqfeet, bedrooms, bathrooms, year_built, credit_rating, occupancy_status, home_type, zip, city, state, are_you_married)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                """, 
+                (model_data['Gender'], model_data['Age'], model_data['Sqfeet'], model_data['Bedrooms'],
+                 model_data['Bathrooms'], model_data['Year Built'], model_data['Credit Rating'],
+                 model_data['Occupancy Status'], model_data['Home Type'], model_data['Zip'],
+                 model_data['City'], model_data['State'], model_data['Are You Married'])
+            )
+            user_id = cursor.lastrowid  # Get the last inserted user ID
+
+            # Insert prediction into the predictions table
+            cursor.execute(
+                """
+                INSERT INTO predictions (user_id, predicted_premium)
+                VALUES (%s, %s)
+                """, 
+                (user_id, predicted_premium)
+            )
+            conn.commit()
+            logger.info("Data saved to MySQL database successfully.")
+        except Exception as db_error:
+            logger.error(f"Error saving data to MySQL: {str(db_error)}")
+        finally:
+            cursor.close()
+            conn.close()
 
         # Call the training function to retrain the model
         from train_model import train_model  # Import here to avoid circular import issues
@@ -122,8 +153,12 @@ def predict():
     except Exception as e:
         logger.error(f'Error during prediction: {str(e)}')
         return jsonify({'error': str(e)}), 500
+
 if __name__ == "__main__":
     if model is None or preprocessor is None:
         logger.error("Model or preprocessor is not loaded, exiting.")
     else:
         app.run(debug=True)
+
+
+
