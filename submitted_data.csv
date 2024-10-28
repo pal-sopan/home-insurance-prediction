@@ -1,0 +1,6 @@
+gender,age,are_you_married,city,state,zip,sqfeet,bedrooms,bathrooms,year_built,crefit_rating,occupancy_status,home_type,Premium
+Male,54,Yes,dfgh,ca,10001,1200,2,2,1989,Excellent,Owner Occupied,Other,45.87
+Male,54,No,dfgh,ca,12345,4532,4,3,2008,Good,Renter Occupied,Duplex,90.76
+Male,54,Yes,pillno,AS,10001,5432,5,3,1987,Normal,Renter Occupied,Duplex,120.1020582
+Female,29,Yes,JOHNSONVILLE,SC,29555,2000,1,1,1899,Good,Owner Occupied,Single Family,146.0627230222516
+Female,65,Yes,DETROIT,MI,48211,100,4,3,1992,Excellent,Owner Occupied,Single Family,124.15873144132284

@@ -1,0 +1,573 @@
+/* Custom Styles */
+.navbar-custom {
+    background-color: #ffffff;
+    /* White background for header */
+    color: #000;
+    /* Black text color */
+    transition: box-shadow 0.3s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Smooth transition for shadow */
+}
+
+.navbar-custom.scrolled {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Add shadow when scrolled */
+}
+
+.navbar-custom .navbar-brand img {
+    max-height: 50px;
+    /* Set maximum height of logo image */
+    width: auto;
+    /* Maintain aspect ratio */
+}
+
+.navbar-custom .nav-link {
+    color: #1c5ea8;
+    /* Apply the #1c5ea8 color to links */
+    padding: 25px;
+    /* Add 25px padding to header links */
+    font-size: 16px;
+    /* Font size for links */
+    font-weight: bold;
+    /* Make the link text bold */
+    display: flex;
+    /* Align text and icon */
+    align-items: center;
+    /* Center items vertically */
+    transition: color 0.3s;
+    /* Smooth transition for color change */
+}
+
+.navbar-custom .nav-link:hover {
+    color: #0056b3;
+    /* Darker shade of blue for hover effect */
+}
+
+.navbar-custom .nav-link i {
+    margin-left: 8px;
+    /* Space between text and icon */
+    color: #1c5ea8;
+    /* Apply the #1c5ea8 color to icons */
+    transition: color 0.3s;
+    /* Smooth transition for icon color change */
+}
+
+.navbar-custom .nav-link:hover i {
+    color: #0056b3;
+    /* Darker shade of blue for icon on hover */
+}
+
+/* main section /
+/* User Information Form Styles */
+.user-info-form,
+.insurance-info {
+    padding-top: 20px;
+    border-radius: 8px;
+    margin: 20px auto;
+    /* max-width: 600px; */
+}
+
+.user-info-form h2,
+.insurance-info h2 {
+    font-size: 28px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    text-align: left;
+    /* Center align the heading */
+}
+
+.user-info-form .icon,
+.insurance-info .icon {
+    color: #1c5ea8;
+    /* Icon color */
+    font-size: 32px;
+    /* Icon size */
+    margin-right: 5px;
+    /* Space between icon and text */
+}
+
+
+/* Style for the result section */
+#result {
+    margin-top: 20px;
+    font-size: 22px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    color: #2c3e50;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+
+    .user-info-form h2,
+    .insurance-info h2 {
+        font-size: 26px;
+        /* Smaller size for medium screens */
+    }
+
+    .user-info-form .icon,
+    .insurance-info .icon {
+        font-size: 30px;
+    }
+
+    .user-info-form,
+    .insurance-info {
+        padding: 0px;
+    }
+}
+
+@media (max-width: 576px) {
+
+    .user-info-form h2,
+    .insurance-info .h2 {
+        font-size: 24px;
+        /* Even smaller size for small screens */
+    }
+
+    .user-info-form .icon,
+    .insurance-info .icon {
+        font-size: 28px;
+    }
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    /* padding-top: 5px; */
+    display: block;
+    font-size: 17px;
+    font-family: 'Open Sans', sans-serif;
+    color: #34495e;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="email"],
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    font-family: 'Open Sans', sans-serif;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    /* Ensures padding is included in width */
+}
+
+.form-group button {
+    background-color: #1c5ea8;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    font-family: 'Open Sans', sans-serif;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    /* Full width for the button */
+    box-sizing: border-box;
+    /* Ensures padding is included in width */
+}
+
+.form-group button:hover {
+    background-color: #003da5;
+}
+
+
+.btn-custom {
+    background-color: #1B2C51;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-custom:hover {
+    background-color: #15203d;
+}
+
+
+/* Footer styling */
+footer {
+    background-color: #1B2C51;
+    /* Dark blue background for footer */
+    color: #fff;
+    /* White text color */
+    padding: 20px 0;
+    /* Vertical padding */
+    padding-top: 40px;
+    /* Additional top padding */
+    text-align: center;
+}
+
+footer a {
+    color: #fff;
+    /* White links */
+    font-size: 16px;
+    /* Font size for links */
+    text-decoration: none;
+    /* Remove underline from links */
+}
+
+footer a:hover {
+    color: #ccc;
+    /* Light gray hover effect for links */
+    text-decoration: underline;
+    /* Add underline on hover */
+}
+
+/* Right Column Contact Info */
+.contact-info {
+    /* padding: 20px; */
+    /* Padding inside the contact info box */
+    border-radius: 8px;
+    /* Rounded corners */
+    text-align: left;
+    /* Left align text */
+    position: relative;
+    /* Positioning for the icon */
+}
+
+.contact-info div {
+    margin-bottom: 10px;
+    /* Space between each block */
+}
+
+.contact-info .phone-number {
+    color: #1c5ea8;
+    /* Dark blue color for phone number */
+    font-weight: bold;
+    /* Make the phone number bold */
+    font-size: 18px;
+    /* Larger font size for the phone number */
+}
+
+/* Style for the heading */
+.need-help {
+    color: #384252;
+    /* Updated color for the heading */
+    font-size: 22px;
+    /* Font size */
+    font-family: 'Open Sans', sans-serif;
+    /* Font family */
+    font-weight: bold;
+    /* Bold text */
+    margin: 0;
+    /* Remove default margin */
+    text-align: left;
+    /* Center align text within its container */
+}
+
+/* Style for the phone link */
+.s {
+    color: #003da5;
+    /* Custom dark blue color for the link */
+    font-size: 22px;
+    /* Font size for the phone number */
+    font-family: 'Open Sans', sans-serif;
+    /* Open Sans font */
+    font-weight: bold;
+    /* Bold text */
+    text-decoration: none;
+    /* Remove underline from link */
+    transition: color 0.3s;
+    /* Smooth transition for color change */
+}
+
+.s:hover {
+    color: #0056b3;
+    /* Darker blue for hover effect */
+    text-decoration: underline;
+    /* Add underline on hover */
+}
+
+/* Style for the paragraph */
+.contact-info p {
+    color: #636d7d;
+    /* Custom color for the paragraph */
+    font-size: 16px;
+    /* Font size */
+    font-family: 'Open Sans', sans-serif;
+    /* Font family */
+    margin: 0;
+    /* Remove default margin */
+}
+
+/* Style for the icon container */
+.icon-container {
+    width: 32px;
+    /* Width of the circle */
+    height: 32px;
+    /* Height of the circle */
+    background-color: #1c5ea8;
+    /* Dark blue background color */
+    border-radius: 50%;
+    /* Makes the container circular */
+    display: flex;
+    /* Use flexbox to center the icon */
+    align-items: center;
+    /* Vertically center the icon */
+    justify-content: center;
+    /* Horizontally center the icon */
+    position: relative;
+    /* For positioning the icon */
+}
+
+.phone-icon {
+    font-size: 20px;
+    /* Size of the icon */
+    color: #fff;
+    /* White color for the icon */
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 991px) {
+    .contact-info {
+        text-align: center;
+        /* Center text for smaller screens */
+    }
+
+    .need-help {
+        text-align: center;
+    }
+
+    .contact-info .phone-number {
+        font-size: 18px;
+        /* Font size adjustment for smaller screens */
+        text-align: center;
+        /* Center phone number text */
+    }
+
+    .icon-container {
+        margin: 0 auto;
+        /* Center icon container */
+    }
+}
+
+
+.is-invalid {
+    border-color: #dc3545;
+    /* Red border for invalid input */
+}
+
+.form-text.text-danger {
+    color: #dc3545;
+    /* Red color for error message */
+}
+
+.vl {
+    border-left: 2px solid #2c3e50;
+    height: 35px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+h4 {
+    font-size: 22px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    color: #2c3e50;
+    text-align: left;
+    /* Center align the heading */
+}
+
+.col-md-3 .container {
+    padding: 25%;
+    /* Add padding to the specific container */
+}
+
+.col-md-3 .progress {
+    height: 20px;
+    /* Optional: Set height for the progress bar */
+}
+
+
+.btn-outline-primary {
+    border-color: #1c5ea8;
+    /* Default border color */
+}
+
+.btn {
+    color: #1c5ea8;
+}
+
+.btn-check:checked+.btn {
+    background-color: #1c5ea8;
+    /* Background color when checked */
+    color: white;
+    /* Text color when checked */
+    border-color: #0056b3;
+    /* Change border color when checked */
+}
+
+.btn-check:not(:checked)+.btn:hover {
+    border-color: #0056b3;
+    /* Change border color on hover */
+}
+
+.form-select {
+    border: 1px solid #1c5ea8;
+    /* Border color */
+    border-radius: 0.5rem;
+    /* Increase border radius for a more rounded effect */
+    /* color: #1c5ea8; */
+    /* Change text color */
+}
+
+.form-select:focus {
+    border-color: #007bff;
+    /* Focus border color */
+    color: #1c5ea8;
+    /* Maintain text color on focus */
+}
+
+/* Input Styling */
+#ticket-count {
+    width: 60px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    border: 2px solid #ced4da;
+    border-radius: 0;
+    padding: 4px;
+}
+
+/* Button Styling */
+.btn-outline-secondary {
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 0;
+    color: #6c757d;
+    border-color: #6c757d;
+    background-color: #fff;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+    .col-md-8 {
+        margin-bottom: 10px;
+    }
+
+    #ticket-count {
+        width: 50px;
+    }
+
+    .btn-outline-secondary {
+        font-size: 1rem;
+        padding: 5px 10px;
+    }
+}
+
+.contact-info,
+.progress-container {
+    position: sticky;
+    top: 120px;
+    /* Distance from the top of the viewport */
+}
+
+#loader {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.progress {
+    height: 30px;
+    /* Adjust height as needed */
+}
+
+.lr-margin {
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+@media (max-width: 576px) {
+    .lr-margin {
+        margin-right: 0;
+        margin-left: 0;
+    }
+}
+
+/* .group-1 {
+    padding: 10px;
+    background-color: #e5eff9;
+    border-radius: 10px 10px 0px 0px;
+} */
+
+/* .group-2 {
+    padding: 10px;
+    background-color: #FAFAFA;
+} */
+
+/* .group-3 {
+    padding: 10px;
+    background-color: #e5eff9;
+} */
+
+/* .group-3b {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #ccddee;
+    border-radius: 5px;
+} */
+
+/* .group-4 {
+    padding: 10px;
+    background-color: #e5eff9;
+    border-radius: 0px 0px 10px 10px;
+} */
+
+.custom-center {
+    margin: auto;
+    padding: 10px;
+}
+
+.full-height {
+    height: 75%;
+    min-height: 75vh;
+    /* Ensures the height covers the 70% viewport */
+}
+
+.group-3 hr {
+    color: #007bff;
+}
+
+.group-4 hr {
+    color: #a39090;
+}
+
+.custom-button-new {
+    background-color: #1c5ea8;
+    color: #fff;
+    padding: 8px 20px; /* Reduced padding for a smaller button */
+    border: none;
+    cursor: pointer;
+    text-decoration: none; /* Removes underline */
+    display: inline-block;
+    border-radius: 10px; /* Adjusted border-radius for a smaller look */
+    font-size: 0.9rem; /* Smaller font size */
+    transition: background-color 0.3s ease;
+}
+
+.custom-button-new:hover {
+    background-color: #05448b; /* Darkens the button on hover */
+}

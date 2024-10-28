@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Central Insurance Quote</title>
+    <link rel="icon" href="{{ url_for('static', filename='img/logo-2.png') }}" type="image/png"> <!-- Favicon link -->
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&family=Roboto:wght@500;700;900&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="static\form-style.css">
+</head>
+
+<body>
+    <!-- Loader -->
+    <div id="loader">
+        <img src="{{ url_for('static', filename='img/loader.gif') }}" alt="Loading...">
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Central Insurance Quote Logo">
+            </a>
+            <div class="vl d-none d-lg-block"></div>
+            <h4 class="d-none d-lg-block">Get Your Home Insurance Premium</h4>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Need Help <i class="fas fa-question-circle"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Main Section -->
+    <div class="container-fluid mt-5 pt-5"> <!-- Add margin-top and padding-top to avoid overlap with fixed navbar -->
+        <div class="row">
+            <div class="col-lg-3 px-5 p-lg-5">
+               
+            </div>
+
+            <div class="col-lg-6">
+                <!-- Main Content -->
+                <!-- User Information Form -->
+                <section class="user-info-form">
+                    <div class="container">
+                        <form id="prediction-form">
+                            <h2><i class="fas fa-user-circle icon"></i> Basic Information </h2>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="gender">Gender <span class="text-danger">*</span></label>
+                                    <select id="gender" name="gender" required style="border-color: #0056b3; width: 80%;">
+                                        <option value="">Select Gender...</option> <!-- Placeholder -->
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="age">Age <span class="text-danger">*</span></label>
+                                    <input type="number" id="age" name="age" placeholder="Enter your age" min="18" max="100" required style="border-color: #0056b3; width: 80%;">
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="are_you_married">Are You Married? <span class="text-danger">*</span></label>
+                                    <select class="form-select" id="are_you_married" name="are_you_married" required style="border-color: #0056b3; width: 80%;">
+                                        <option value="">Select Marital Status...</option> <!-- Placeholder -->
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <hr>
+                            
+                            <!-- Location Information -->
+                            <h2><i class="fas fa-map-marked-alt icon"></i> What is your current Location?</h2>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="city">City: <span class="text-danger">*</span></label>
+                                        <input type="text" id="city" name="city" placeholder="Enter City" required style="border-color: #0056b3; width: 80%;">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="state">State <span class="text-danger">*</span></label>
+                                        <input type="text" id="state" name="state" placeholder="Enter State" required style="border-color: #0056b3; width: 80%;">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="zip">Zipcode <span class="text-danger">*</span></label>
+                                        <input type="text" id="zip" name="zip" placeholder="Enter Zipcode" required style="border-color: #0056b3; width: 80%;" maxlength="5" pattern="\d{0,5}" title="Please enter a valid 5-digit zipcode" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 5);">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <hr>
+                            
+                            <!-- Home Information -->
+                            <h2><i class="fas fa-home icon"></i> Home Information</h2>
+                            <div class="row form-group lr-margin" style="margin-bottom: 10px;">
+                                <label for="sqfeet" class="col-md-8 col-form-label">Square Feet: <span class="text-danger">*</span></label>
+                                <div class="col-md-4 d-flex justify-content-center">
+                                    <input type="number" id="sqfeet" name="sqfeet" placeholder="Enter Square Feet" required style="border-color: #0056b3; width: 80%;">
+                                </div>
+                            </div>
+                            
+                            <div class="row form-group lr-margin" style="margin-bottom: 10px;">
+                                <label for="bedrooms" class="col-md-8 col-form-label">Number of Bedrooms: <span class="text-danger">*</span></label>
+                                <div class="col-md-4 d-flex justify-content-center">
+                                    <input type="number" id="bedrooms" name="bedrooms" placeholder="Enter Number of Bedrooms" required style="border-color: #0056b3; width: 80%;">
+                                </div>
+                            </div>
+                            
+                            <div class="row form-group lr-margin" style="margin-bottom: 10px;">
+                                <label for="bathrooms" class="col-md-8 col-form-label">Number of Bathrooms: <span class="text-danger">*</span></label>
+                                <div class="col-md-4 d-flex justify-content-center">
+                                    <input type="number" id="bathrooms" name="bathrooms" placeholder="Enter Number of Bathrooms" required style="border-color: #0056b3; width: 80%;">
+                                </div>
+                            </div>
+                            
+                            <div class="row form-group lr-margin" style="margin-bottom: 10px;">
+                                <label for="year_built" class="col-md-8 col-form-label">Year Built: <span class="text-danger">*</span></label>
+                                <div class="col-md-4 d-flex justify-content-center">
+                                    <input type="number" id="year_built" name="year_built" placeholder="Enter Year Built" required style="border-color: #0056b3; width: 80%;">
+                                </div>
+                            </div>
+                            
+                            <div class="row form-group lr-margin" style="margin-bottom: 10px;">
+                                <label for="credit_rating" class="col-md-8 col-form-label">Credit Rating: <span class="text-danger">*</span></label>
+                                <div class="col-md-4 d-flex justify-content-center">
+                                    <select id="credit_rating" name="credit_rating" required style="border-color: #0056b3; width: 80%;">
+                                        <option value="">Select Credit Rating</option>
+                                        <option value="Excellent">Excellent</option>
+                                        <option value="Good">Good</option>
+                                        <option value="Normal">Normal</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            
+                            <div class="row form-group lr-margin" style="margin-bottom: 10px;">
+                                <label for="occupancy_status" class="col-md-8 col-form-label">Occupancy Status: <span class="text-danger">*</span></label>
+                                <div class="col-md-4 d-flex justify-content-center">
+                                    <select class="form-select" id="occupancy_status" name="occupancy_status" required style="border-color: #0056b3; width: 80%;">
+                                        <option value="">Select Status...</option> <!-- Placeholder -->
+                                        <option value="Owner Occupied">Owner Occupied</option>
+                                        <option value="Renter Occupied">Renter Occupied</option>
+                                        <option value="Vacant">Vacant</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="row form-group lr-margin" style="margin-bottom: 10px;">
+                                <label for="home_type" class="col-md-8 col-form-label">Home Type: <span class="text-danger">*</span></label>
+                                <div class="col-md-4 d-flex justify-content-center">
+                                    <select class="form-select" id="home_type" name="home_type" required style="border-color: #0056b3; width: 80%;">
+                                        <option value="">Select Home Type...</option> <!-- Placeholder -->
+                                        <option value="Single Family">Single Family</option>
+                                        <option value="Duplex">Duplex</option>
+                                        <option value="Mobile Home">Mobile Home</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            
+
+                                               
+                                    
+                                    <div class="row justify-content-center pt-5">
+                                        <div class="col-auto">
+                                            <div class="form-group">
+                                                <button type="submit">Get Prediction</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="result" style="margin-top: 20px;"></div>
+                        </form>
+                    </div>
+                </section>
+            </div>
+            <div class="col-lg-3 px-5 p-lg-5">
+                <!-- Right Column Content -->
+                <div class="contact-info">
+                    <div>
+                        <h3 class="need-help">Let's Connect With Us?</h3>
+                    </div>
+                    <div>
+                        <a href="https://www.centralinsurancequote.com/contact" class="custom-button-new">Contact Us</a>
+                    </div>
+         <div>
+                        <p>Our Care Center experts are here to assist you with any inquiries. Reach out to us today!</p>
+                    </div>
+                </div>
+            </div>
+            
+
+        </div>
+    </div>
+    
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Central Insurance Quote. All Rights Reserved.</p>
+            <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </div>
+    </footer>
+
+
+
+<script>
+    $(document).ready(function() {
+        $('#prediction-form').on('submit', function(event) {
+            event.preventDefault();
+            const formData = $(this).serializeArray();
+            const jsonData = {};
+
+            formData.forEach(function(item) {
+                jsonData[item.name] = item.value;
+            });
+        console.log("Form Data Sent:", jsonData);  // Log the data being sent
+
+
+            // Send the JSON data via AJAX
+            $.ajax({
+                url: '/predict',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(jsonData),
+                success: function(data) {
+                    const formattedPremium = parseFloat(data.predicted_premium).toFixed(2);
+                    $('#result').html('Predicted Premium: $' + formattedPremium + ' per month');
+                },
+                error: function(xhr) {
+                    let errorMessage = 'An error occurred';
+                    if (xhr.responseJSON && xhr.responseJSON.error) {
+                        errorMessage = xhr.responseJSON.error;
+                    }
+                    $('#result').html('Error: ' + errorMessage);
+                    console.error("Error response:", xhr.responseJSON);  // Log error response
+
+                }
+            });
+        });
+    });
+</script>
+
+
+
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="static\form-javascript.js"></script>
+</body>
+
+</html>
