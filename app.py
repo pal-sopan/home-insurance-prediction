@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, render_template 
+from flask import Flask, request, jsonify, render_template
 import joblib
 import pandas as pd
 import logging
@@ -34,10 +34,61 @@ def get_db_connection():
         database='home_insurance'  # Your database name
     )
 
+def upload_csv_to_db(csv_file_path):
+    conn = None
+    cursor = None
+    try:
+        df = pd.read_csv(csv_file_path)
+        print(df.columns)  # Print the columns to check them
+        
+        # Check for required columns
+        required_columns = ['gender', 'age', 'sqfeet', 'bedrooms', 'bathrooms', 
+                            'year_built', 'credit_rating', 'occupancy_status', 
+                            'home_type', 'zip', 'city', 'state', 'are_you_married']
+        
+        for col in required_columns:
+            if col not in df.columns:
+                raise ValueError(f'Missing column in CSV: {col}')
+            
+        df['are_you_married'] = df['are_you_married'].map({'Yes': 1, 'No': 0})    
+
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        for index, row in df.iterrows():
+            cursor.execute(
+                """
+                INSERT INTO users (gender, age, sqfeet, bedrooms, bathrooms, year_built, credit_rating, occupancy_status, home_type, zip, city, state, are_you_married)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                """,
+                (row['gender'], row['age'], row['sqfeet'], row['bedrooms'],
+                 row['bathrooms'], row['year_built'], row['credit_rating'],
+                 row['occupancy_status'], row['home_type'], row['zip'],
+                 row['city'], row['state'], row['are_you_married'])
+            )
+
+        conn.commit()
+        print("CSV data uploaded to MySQL database successfully.")
+
+    except Exception as e:
+        print(f'Error uploading CSV data to MySQL: {str(e)}')
+
+    finally:
+        if cursor is not None:
+            cursor.close()  # Close cursor only if it was created
+        if conn is not None:
+            conn.close()  # Close connection only if it was created
+
 @app.route('/')
 def home():
     """Render the home page."""
     return render_template('index.html')  # Adjust path as needed
+
+@app.route('/upload-csv', methods=['POST'])
+def upload_csv():
+    csv_file_path = r'C:\Users\HP\Desktop\Home insurance prediction price\submitted_data.csv'
+    upload_csv_to_db(csv_file_path)
+    return "CSV uploaded successfully!"
 
 # Route to update the model with new data
 @app.route('/update-model', methods=['POST'])
@@ -143,6 +194,17 @@ def predict():
         finally:
             cursor.close()
             conn.close()
+            
+        # Store the submitted data in a CSV file
+        csv_file_path = 'submitted_data.csv'
+        try:
+            if not os.path.isfile(csv_file_path):
+                df.to_csv(csv_file_path, mode='w', header=True, index=False)  # Create file and write header
+            else:
+                df.to_csv(csv_file_path, mode='a', header=False, index=False)  # Append to existing file
+            logger.info(f"Data saved to {csv_file_path} successfully.")
+        except Exception as file_error:
+            logger.error(f"Error saving data to CSV: {str(file_error)}")
 
         # Call the training function to retrain the model
         from train_model import train_model  # Import here to avoid circular import issues
@@ -159,6 +221,3 @@ if __name__ == "__main__":
         logger.error("Model or preprocessor is not loaded, exiting.")
     else:
         app.run(debug=True)
-
-
-
